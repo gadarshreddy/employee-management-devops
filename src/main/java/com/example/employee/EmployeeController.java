@@ -5,6 +5,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/employees")
+// Employee Management REST API
 public class EmployeeController {
 
     private final List<Map<String, Object>> employees = new ArrayList<>();
