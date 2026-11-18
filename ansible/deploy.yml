@@ -1,0 +1,7 @@
+---
+- name: Deploy Employee Management Application
+  hosts: app_servers
+  become: yes
+
+  roles:
+    - employee_app

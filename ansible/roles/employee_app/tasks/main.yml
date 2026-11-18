@@ -1,0 +1,33 @@
+---
+- name: Install Java runtime
+  apt:
+    name: openjdk-25-jre
+    state: present
+    update_cache: yes
+
+- name: Create application directory
+  file:
+    path: "{{ app_directory }}"
+    state: directory
+    mode: '0755'
+
+- name: Copy application JAR
+  copy:
+    src: "{{ app_jar_source }}"
+    dest: "{{ app_jar_destination }}"
+    mode: '0644'
+  notify: Restart employee application
+
+- name: Create systemd service
+  template:
+    src: employee-management.service.j2
+    dest: /etc/systemd/system/employee-management.service
+    mode: '0644'
+  notify: Restart employee application
+
+- name: Enable and start employee application
+  systemd:
+    name: employee-management
+    enabled: yes
+    state: started
+    daemon_reload: yes

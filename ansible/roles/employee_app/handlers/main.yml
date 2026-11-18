@@ -1,0 +1,6 @@
+---
+- name: Restart employee application
+  systemd:
+    name: employee-management
+    state: restarted
+    daemon_reload: yes

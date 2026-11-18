@@ -1,0 +1,13 @@
+[Unit]
+Description=Employee Management Spring Boot Application
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory={{ app_directory }}
+ExecStart=/usr/bin/java -jar {{ app_jar_destination }} --server.port={{ app_port }}
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
